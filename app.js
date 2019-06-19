@@ -16,7 +16,15 @@ var commentRoutes = require("./routes/comments"),
 	authRoutes = require("./routes/auth");
 
 //seedDB(); // seed the db
-mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true });
+//mongoose.connect('mongodb://localhost/yelp_camp', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://mowrym19:Ewok%401985@cluster0-b1no8.mongodb.net/test?retryWrites=true', {
+	useNewUrlParser: true,
+	useCreateIndex: true
+}).then(() => {
+	console.log('Connected to DB!');
+}).catch(err => {
+	console.log('ERROR:', err.message);
+});
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
