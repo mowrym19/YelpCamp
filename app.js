@@ -1,4 +1,6 @@
-var express = require("express"),
+var session = require("express-session"),
+	MongoStore = require("connect-mongo")(session),
+	express = require("express"),
 	passport = require("passport"),
 	localStrategy = require("passport-local"),
 	app = express(),
@@ -32,10 +34,12 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 
-app.use(require("express-session")({
-	secret: "Vienna Sausage",
-	resave: false,
-	saveUninitialized: false
+app.use(session({
+    secret: "Vienna Sausage",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 180 * 60 * 1000 } // 180 minutes session expiration
 }));
 
 app.use(passport.initialize());
