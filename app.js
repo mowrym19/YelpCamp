@@ -19,9 +19,10 @@ var commentRoutes = require("./routes/comments"),
 
 //seedDB(); // seed the db
 
-mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
-
-//mongoose.connect('mongodb+srv://mowrym19:Ewok%401985@cluster0-b1no8.mongodb.net/test?retryWrites=true', {
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url, {useNewUrlParser: true});
+//added DATABASEURL key to Heroku
+//mongoose.connect('mongodb+srv://mowrym19:<password>@cluster0-b1no8.mongodb.net/test?retryWrites=true', {
 //	useNewUrlParser: true,
 //	useCreateIndex: true
 // }).then(() => {
@@ -61,6 +62,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use(authRoutes);
 
+//added var to ensure Heroku can find port
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 	console.log('The YelpCamp server has started');
