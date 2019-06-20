@@ -38,7 +38,7 @@ app.use(flash());
 
 
 app.use(session({
-    secret: "Vienna Sausage",
+    secret: process.env.SECRET,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false,
     saveUninitialized: false
