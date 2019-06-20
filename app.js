@@ -36,10 +36,9 @@ app.use(flash());
 
 app.use(session({
     secret: "Vienna Sausage",
-    resave: false,
-    saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { maxAge: 180 * 60 * 1000 } // 180 minutes session expiration
+    resave: false,
+    saveUninitialized: false
 }));
 
 app.use(passport.initialize());
