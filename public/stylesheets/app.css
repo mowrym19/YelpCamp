@@ -2,4 +2,7 @@
 background: #F5F5F5;
 }
 
-
+#map {
+	height: 400px;
+	width: 100%;
+}

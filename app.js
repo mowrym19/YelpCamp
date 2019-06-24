@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var session = require("express-session"),
 	MongoStore = require("connect-mongo")(session),
 	express = require("express"),
@@ -44,6 +46,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
+app.locals.moment = require('moment');
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
